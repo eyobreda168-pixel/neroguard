@@ -1,96 +1,78 @@
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/jetbrains-mono/700.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* NERO SECURITY Dark Theme - No light mode */
+    --background: 225 15% 4%;
+    --foreground: 210 20% 92%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 225 15% 7%;
+    --card-foreground: 210 20% 92%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 225 15% 6%;
+    --popover-foreground: 210 20% 92%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 187 100% 42%;
+    --primary-foreground: 225 15% 4%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 225 15% 12%;
+    --secondary-foreground: 210 20% 85%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 225 12% 14%;
+    --muted-foreground: 215 15% 55%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 160 100% 50%;
+    --accent-foreground: 225 15% 4%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 20% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 225 15% 4%;
 
-    --radius: 0.5rem;
+    --success: 142 76% 45%;
+    --success-foreground: 225 15% 4%;
 
-    --sidebar-background: 0 0% 98%;
+    --border: 225 12% 16%;
+    --input: 225 12% 16%;
+    --ring: 187 100% 42%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    --radius: 0.75rem;
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Custom NERO tokens */
+    --nero-deep: 225 20% 3%;
+    --nero-surface: 225 15% 8%;
+    --nero-elevated: 225 15% 11%;
+    --nero-cyan: 187 100% 50%;
+    --nero-cyan-dim: 187 80% 35%;
+    --nero-green: 160 100% 50%;
+    --nero-green-dim: 160 80% 35%;
+    --nero-amber: 38 100% 55%;
+    --nero-red: 0 85% 55%;
+    --nero-glow-cyan: 0 0% 100% / 0.1;
+    --nero-glass: 225 15% 10% / 0.7;
+    --nero-glass-border: 225 12% 20% / 0.5;
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    /* Typography */
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    --font-sans: "Inter", system-ui, sans-serif;
 
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Shadows */
+    --shadow-glow-cyan: 0 0 20px hsl(187 100% 50% / 0.3), 0 0 40px hsl(187 100% 50% / 0.1);
+    --shadow-glow-green: 0 0 20px hsl(160 100% 50% / 0.3), 0 0 40px hsl(160 100% 50% / 0.1);
+    --shadow-glow-amber: 0 0 20px hsl(38 100% 55% / 0.3), 0 0 40px hsl(38 100% 55% / 0.1);
+    --shadow-glow-red: 0 0 20px hsl(0 85% 55% / 0.3), 0 0 40px hsl(0 85% 55% / 0.1);
+    --shadow-elevated: 0 8px 32px hsl(225 20% 3% / 0.5), 0 2px 8px hsl(225 20% 3% / 0.3);
   }
 }
 
@@ -99,7 +81,188 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    font-family: var(--font-sans);
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Terminal-style scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--nero-deep));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--nero-cyan-dim));
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--nero-cyan));
+  }
+}
+
+@layer utilities {
+  /* Glass morphism utilities */
+  .glass-panel {
+    @apply backdrop-blur-xl border rounded-xl;
+    background: hsl(var(--nero-glass));
+    border-color: hsl(var(--nero-glass-border));
+  }
+
+  .glass-panel-elevated {
+    @apply glass-panel shadow-elevated;
+  }
+
+  /* Glow effects */
+  .glow-cyan {
+    box-shadow: var(--shadow-glow-cyan);
+  }
+
+  .glow-green {
+    box-shadow: var(--shadow-glow-green);
+  }
+
+  .glow-amber {
+    box-shadow: var(--shadow-glow-amber);
+  }
+
+  .glow-red {
+    box-shadow: var(--shadow-glow-red);
+  }
+
+  /* Text glow */
+  .text-glow-cyan {
+    text-shadow: 0 0 10px hsl(187 100% 50% / 0.5), 0 0 20px hsl(187 100% 50% / 0.3);
+  }
+
+  .text-glow-green {
+    text-shadow: 0 0 10px hsl(160 100% 50% / 0.5), 0 0 20px hsl(160 100% 50% / 0.3);
+  }
+
+  /* Terminal styling */
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .terminal-text {
+    @apply font-mono text-sm tracking-wide;
+  }
+
+  /* Gradient backgrounds */
+  .bg-nero-gradient {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--nero-deep)) 0%,
+      hsl(var(--nero-surface)) 100%
+    );
+  }
+
+  .bg-nero-radial {
+    background: radial-gradient(
+      ellipse at center top,
+      hsl(var(--nero-elevated)) 0%,
+      hsl(var(--nero-deep)) 70%
+    );
+  }
+
+  /* Border gradient */
+  .border-gradient-cyan {
+    border-image: linear-gradient(
+      135deg,
+      hsl(var(--nero-cyan)) 0%,
+      hsl(var(--nero-cyan-dim)) 100%
+    ) 1;
+  }
+
+  /* Risk level indicators */
+  .risk-safe {
+    @apply text-success;
+  }
+
+  .risk-low {
+    @apply text-accent;
+  }
+
+  .risk-medium {
+    @apply text-warning;
+  }
+
+  .risk-high {
+    @apply text-destructive;
+  }
+
+  .risk-critical {
+    @apply text-destructive;
+    animation: pulse-red 2s ease-in-out infinite;
+  }
+
+  /* Animations */
+  @keyframes pulse-cyan {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes pulse-red {
+    0%, 100% {
+      opacity: 1;
+      text-shadow: 0 0 10px hsl(0 85% 55% / 0.5);
+    }
+    50% {
+      opacity: 0.8;
+      text-shadow: 0 0 20px hsl(0 85% 55% / 0.8);
+    }
+  }
+
+  @keyframes scan-line {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes terminal-blink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .animate-scan-line {
+    animation: scan-line 2s ease-in-out infinite;
+  }
+
+  .animate-terminal-blink {
+    animation: terminal-blink 1s step-end infinite;
+  }
+
+  .animate-pulse-cyan {
+    animation: pulse-cyan 2s ease-in-out infinite;
+  }
+
+  /* Shadow utilities */
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
   }
 }

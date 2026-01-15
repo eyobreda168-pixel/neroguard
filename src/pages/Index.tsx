@@ -1,13 +1,37 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import React, { useState, useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
+import { SplashScreen } from "@/components/SplashScreen";
+import Dashboard from "./Dashboard";
 
-const Index = () => {
+const Index: React.FC = () => {
+  const [showSplash, setShowSplash] = useState(true);
+  const [hasSeenSplash, setHasSeenSplash] = useState(false);
+
+  useEffect(() => {
+    // Check if user has seen splash in this session
+    const seen = sessionStorage.getItem("nero_splash_seen");
+    if (seen) {
+      setShowSplash(false);
+      setHasSeenSplash(true);
+    }
+  }, []);
+
+  const handleSplashComplete = () => {
+    sessionStorage.setItem("nero_splash_seen", "true");
+    setShowSplash(false);
+    setHasSeenSplash(true);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <>
+      <AnimatePresence mode="wait">
+        {showSplash && !hasSeenSplash && (
+          <SplashScreen onComplete={handleSplashComplete} />
+        )}
+      </AnimatePresence>
+      
+      {(!showSplash || hasSeenSplash) && <Dashboard />}
+    </>
   );
 };
 
