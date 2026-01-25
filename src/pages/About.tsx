@@ -156,6 +156,48 @@ const About: React.FC = () => {
           </div>
         </GlassPanel>
 
+        {/* Creator Section */}
+        <GlassPanel className="p-6">
+          <div className="flex items-start gap-4">
+            <div className="p-2 rounded-lg bg-primary/10">
+              <Info className="w-5 h-5 text-primary" />
+            </div>
+            <div className="space-y-3">
+              <h2 className="font-semibold">Meet the Creator</h2>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                NERO Security is created by <span className="text-foreground font-medium">Eyob Reda</span>, 
+                a 17-year-old passionate about technology with skills in cybersecurity, programming, 
+                and design. Building tools that make the internet safer for everyone.
+              </p>
+              <div className="pt-2 space-y-2">
+                <p className="text-sm text-accent font-medium">Open to Collaboration</p>
+                <p className="text-sm text-muted-foreground">
+                  Interested in working together? I welcome anyone who wants to collaborate on 
+                  security projects, development, or design work.
+                </p>
+              </div>
+              <div className="pt-3 space-y-2">
+                <p className="text-xs text-muted-foreground uppercase tracking-wider font-medium">Get in Touch</p>
+                <div className="flex flex-col gap-1.5">
+                  <a 
+                    href="mailto:eyobreda168@gmail.com" 
+                    className="text-sm text-primary hover:underline flex items-center gap-2"
+                  >
+                    <ExternalLink className="w-3 h-3" />
+                    eyobreda168@gmail.com
+                  </a>
+                  <p className="text-sm text-muted-foreground font-mono">
+                    📞 +251 900 915 449
+                  </p>
+                  <p className="text-sm text-muted-foreground font-mono">
+                    📞 +251 918 183 861
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </GlassPanel>
+
         {/* Version Info */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -164,7 +206,7 @@ const About: React.FC = () => {
           className="text-center py-4 space-y-2"
         >
           <p className="text-xs text-muted-foreground font-mono">
-            Version 1.0.0 • Built with care
+            Version 1.0.0 • Built with care by Eyob Reda
           </p>
           <p className="text-xs text-muted-foreground">
             © 2024 NERO Security. All rights reserved.
