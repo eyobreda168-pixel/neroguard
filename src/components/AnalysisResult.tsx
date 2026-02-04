@@ -9,12 +9,20 @@ import {
   ChevronDown,
   ChevronUp,
   Lightbulb,
-  Shield
+  Shield,
+  Download,
+  Copy,
+  Check
 } from "lucide-react";
 import { GlassPanel } from "./ui/GlassPanel";
 import { RiskBadge, type RiskLevel } from "./ui/RiskBadge";
+import { NeroButton } from "./ui/NeroButton";
 import { cn } from "@/lib/utils";
 import { type AnalysisResult as AnalysisResultType, formatTimestamp } from "@/lib/threatAnalysis";
+import { RiskMeter } from "./analysis/RiskMeter";
+import { ThreatBreakdown } from "./analysis/ThreatBreakdown";
+import { SecurityScore } from "./analysis/SecurityScore";
+import { AnalysisTimeline } from "./analysis/AnalysisTimeline";
 
 interface AnalysisResultProps {
   result: AnalysisResultType;
@@ -41,13 +49,37 @@ const glowVariants: Record<RiskLevel, "cyan" | "green" | "amber" | "red" | "none
 export const AnalysisResultCard: React.FC<AnalysisResultProps> = ({ result }) => {
   const [showDetails, setShowDetails] = React.useState(true);
   const [showIndicators, setShowIndicators] = React.useState(true);
+  const [copied, setCopied] = React.useState(false);
+
+  const handleCopyReport = () => {
+    const report = `NeroGuard Security Report
+========================
+Risk Level: ${result.riskLevel.toUpperCase()}
+Confidence: ${result.confidence}%
+Analyzed: ${formatTimestamp(result.timestamp)}
+Type: ${result.inputType}
+
+Summary: ${result.summary}
+
+Indicators:
+${result.indicators.map(i => `- [${i.severity.toUpperCase()}] ${i.type}: ${i.description}`).join('\n')}
+
+Recommendations:
+${result.recommendations.map(r => `• ${r}`).join('\n')}
+`;
+    navigator.clipboard.writeText(report);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
+      className="space-y-6"
     >
+      {/* Main Result Card */}
       <GlassPanel 
         className="overflow-hidden"
         glow={glowVariants[result.riskLevel]}
@@ -65,6 +97,16 @@ export const AnalysisResultCard: React.FC<AnalysisResultProps> = ({ result }) =>
               <p className={cn("text-lg font-medium", riskColors[result.riskLevel])}>
                 {result.summary}
               </p>
+            </div>
+            <div className="flex gap-2">
+              <NeroButton
+                variant="ghost"
+                size="icon"
+                onClick={handleCopyReport}
+                title="Copy report"
+              >
+                {copied ? <Check className="w-4 h-4 text-success" /> : <Copy className="w-4 h-4" />}
+              </NeroButton>
             </div>
           </div>
 
@@ -207,6 +249,35 @@ export const AnalysisResultCard: React.FC<AnalysisResultProps> = ({ result }) =>
           </p>
         </div>
       </GlassPanel>
+
+      {/* Visual Reports Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Risk Meter */}
+        <GlassPanel className="p-6">
+          <h3 className="text-sm font-semibold mb-4 font-orbitron text-center">Risk Assessment</h3>
+          <RiskMeter riskLevel={result.riskLevel} confidence={result.confidence} />
+        </GlassPanel>
+
+        {/* Security Score */}
+        <SecurityScore
+          riskLevel={result.riskLevel}
+          inputType={result.inputType}
+          indicators={result.indicators}
+        />
+      </div>
+
+      {/* Second Row */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Threat Breakdown Chart */}
+        <ThreatBreakdown indicators={result.indicators} />
+
+        {/* Analysis Timeline */}
+        <AnalysisTimeline
+          inputType={result.inputType}
+          riskLevel={result.riskLevel}
+          indicatorCount={result.indicators.length}
+        />
+      </div>
     </motion.div>
   );
 };
